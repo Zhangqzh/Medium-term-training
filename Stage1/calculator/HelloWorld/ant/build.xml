@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HelloWorld" default="run" basedir=".">
+  <property name="src" value="src"/>
+  <property name="classes" value="classes"/>
+  <property name="lib" value="lib"/>
+
+  <target name="init">
+  <mkdir dir="${classes}"/>
+  <mkdir dir="${lib}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${classes}"/>
+    <delete dir="${lib}"/>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar jarfile="${lib}/HelloWorld.jar">
+      <fileset dir="${classes}"/>
+      <manifest>
+        <attribute name="Main-class" value="HelloWorld"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src}" destdir="${classes}">
+     <include name="HelloWorld.java"/>
+    </javac>
+  </target>
+
+  <target name="run" depends="compile">
+    <java classname="HelloWorld" classpath="${classes}"/>
+  </target>
+
+
+
+</project>   
